@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="../../components.js"></script>
+</head>
+<body>
+    <dcc-component type="./timer.js" id="timer1"></dcc-component>
+    <dcc-component type="./counter.js" id="counter1"></dcc-component>
+    <dcc-component type="./pointer.js" id="pointer1"></dcc-component>
+    <dcc-connector publisher="timer1" subscriber="counter1"></dcc-connector>
+</body>
+</html>

@@ -1,0 +1,25 @@
+var Counter;
+
+Counter = new Component('./counter.js');
+Counter.extends('./ui-element.js');
+Counter.listen('tickEvent', function (timer) {
+    this.add();
+});
+Counter.provide('counterInterface', function () {
+    return  {
+        'add' : this.add,
+        'get' : this.get
+    };
+});
+Counter.build(function (element) {
+    var counted = 0;
+
+    this.add = function () {
+        counted += 1;
+        this.html(counted.toString());
+    };
+
+    this.get = function () {
+        return counted;
+    }
+});
