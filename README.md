@@ -74,7 +74,23 @@ MyFirstComponent.start(function () {
 });
 ```
 
+### Manipulando graficamente
+Todo componente recebe no ciclo de install uma referência para a tag HTML que o chamou. Essa tag é o escopo de aplicação do componente e é nela que devemos colocar a UI do componente .
 
+```js
+var MyFirstComponent;
+MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component.js');
+MyFirstComponent.install(function (element) {
+    this.sayHello = function () {
+        element.innerHTML = 'ola';
+    };
+});
+MyFirstComponent.start(function () {
+    this.sayHello();
+});
+```
+
+Vale notar que o objeto element é um objeto do DOM e portanto implementa toda a API de HTMLElementPrototype com métodos como appendChild, innerHTML, etc...
 
 
 
