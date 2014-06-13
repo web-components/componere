@@ -28,7 +28,7 @@ Para construir um componente, basta acessar o contrutor que o framework disponib
 
 ```js
 var MyFirstComponent;
-MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component');
+MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component.js');
 ```
 
 E para acessar o componente agora, basta inclui-lo na sua página html.
@@ -41,7 +41,46 @@ E para acessar o componente agora, basta inclui-lo na sua página html.
     <script type="text/javascript" src="./components.min.js"></script>
 </head>
 <body>
-    <component type="http://my-awsome-domain.com/my-first-component" id="myFirstComponentInstance"></component>
+    <component type="http://my-awsome-domain.com/my-first-component.js" id="myFirstComponentInstance"></component>
 </body>
 </html>
 ```
+
+### Adicionando comportamento
+O componente anterior não faz muita coisa além de existir no browser. Para adicionarmos um pouco de comportamento devemos olhar o ciclo de install. No ciclo de install, confome veremos mais a frente, o componente ainda não recebeu nenhuma das interfaces requeridas e nenhum evento esta sendo escutado ou emitido pelo componente. Portanto, é nessa etapa que devemos adicionar alguns métodos ao nosso componente.
+
+```js
+var MyFirstComponent;
+MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component.js');
+MyFirstComponent.install(function () {
+    this.sayHello = function () {
+        alert('Hello!');
+    };
+});
+```
+
+Agora precisamos apresentar a mensagem para o usuário, para fazer isso, devemos olhar o ciclo de start. No ciclo de start, conforme veremos mais a frente, o componente já esta pronto para ser usado, todas as interfaces foram fornecidas todos os eventos já estão sendo escutados e todos os métodos ja foram adicionados. Portanto, é nessa etapa que devemos iniciar o comportamento do componente.
+
+```js
+var MyFirstComponent;
+MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component.js');
+MyFirstComponent.install(function () {
+    this.sayHello = function () {
+        alert('Hello!');
+    };
+});
+MyFirstComponent.start(function () {
+    this.sayHello();
+});
+```
+
+
+
+
+
+
+
+
+
+
+
