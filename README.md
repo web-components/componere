@@ -117,5 +117,62 @@ MyAwsomeComponent.start(function () {
 ```
 Note que como MyAwsomeComponent extende MyFirstComponent o método html esta acessível.
 
+### Emitindo e escutando eventos de outros componentes
+Todo componente pode emitir e escutar eventos de outros componentes. Por exemplo, vamos supor que desejamos ter um componente timer que fica a cada segundo emitindo um sinal de tick e um couter que toda vez que recebe um sinal de tick incrementa um contador.
+
+```js
+var Timer;
+Timer = new Component('./timer.js');
+Timer.publish('tickEvent');
+Timer.install(function (element) {
+    this.tick = function () {
+        this.tickEvent();
+        element.innerHTML = element.innerHTML === '-' ? '|' : '-';
+    };
+});
+Timer.start(function () {
+    setInterval(this.tick.bind(this), 1000);
+});
+```
+
+Note que ao informar que o timer emite um evento tickEvent automaticamente, um método tickEvent é adicionado ao componente que quando chamado dispara o evento. Lembres-e no ciclo de install esse método ainda não foi adicionado ao componente e portanto o evento não pode ser emitido, apenas após o ciclo de start ter iniciado isso pode ocorrer, por isso, apenas no start o tick é chamado.
+
+```js
+var Counter;
+
+Counter = new Component('./counter.js');
+Counter.listen('tickEvent', function () {
+    this.add();
+});
+Counter.install(function (element) {
+    var counted = 0;
+
+    this.add = function () {
+        counted += 1;
+        element.innerHTML = counted.toString();
+    };
+});
+```
+
+Note que para informar que o componente escuta um evento tickEvent, devemos utilizar o método listen. No callback do evento, o componente ja passou pelos ciclos de install e start e portanto, o componente ja está montado e pronto para uso.
+
+Após criados os componentes, devemos instancia-los e ligar as instancias para escutarem os eventos das instâncias corretas.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="./components.min.js"></script>
+</head>
+<body>
+    <component type="./timer.js" id="timerInstance"></component>
+    <component type="./counter.js" id="counterInstance" tickEvent="timerInstance"></component>
+</body>
+</html>
+``` 
+
+
+
 
 
