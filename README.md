@@ -135,11 +135,10 @@ Timer.start(function () {
 });
 ```
 
-Note que ao informar que o timer emite um evento tickEvent automaticamente, um método tickEvent é adicionado ao componente que quando chamado dispara o evento. Lembres-e no ciclo de install esse método ainda não foi adicionado ao componente e portanto o evento não pode ser emitido, apenas após o ciclo de start ter iniciado isso pode ocorrer, por isso, apenas no start o tick é chamado.
+Note que ao informar que o timer emite um evento tickEvent automaticamente, um método tickEvent é adicionado ao componente que quando chamado dispara o evento. Lembres-e no ciclo de install esse método ainda não foi adicionado ao componente e portanto o evento não pode ser emitido, apenas após o ciclo de install isso pode ocorrer, por isso, apenas no start o tick é chamado.
 
 ```js
 var Counter;
-
 Counter = new Component('./counter.js');
 Counter.listen('tickEvent', function () {
     this.add();
@@ -172,7 +171,56 @@ Após criados os componentes, devemos instancia-los e ligar as instancias para e
 </html>
 ``` 
 
+### Requisitando e provendo interfaces
+Todo componente pode prover e requisitar interfaces. Por exemplo, vamos supor que desejamos ter um componente car que desenha na tela um carro, contudo, para desenhar o carro, devemos saber a sua posição e para saber a posição do carro, precisamos saber o tempo transcorrido. Portanto, o componente car vai requerer uma interface watchInterface que retorna o tempo e vamos implementar um componente watch que irá prover essa interface.
 
+```js
+var Watch;
+Watch = new Component('./watch.js');
+Watch.provide('watchInterface', function () {
+    return {
+        'hours'   : this.tick,
+        'minutes' : this.minutes,
+        'seconds' : this.seconds
+    };
+});
+Watch.install(function (element) {
+    this.hours = function () {
+        return new Date().getHours();
+    };
+    
+    this.minutes = function () {
+        return new Date().getMinutes();
+    };
+    
+    this.seconds = function () {
+        return new Date().getSeconds();
+    };
+});
+```
+Note que o provide recebe uma função que constrói a interface provida, essa função, é executada no contexto do componente e só é executada após o ciclo de install.
 
+```js
+var Car;
+Car = new Component('./car.js');
+Car.require('watchInterface', function (watch) {
+    this.watch = watch;
+});
+```
+Note que o require recebe a interface requerida no callback passado. O contexto de execução do callback é o do componente, portanto, podemos adicionar ao objeto a interface requerida como um atributo para uso posterior.
 
+Após criados os componentes, devemos instancia-los e ligar as instancias para proverem as interfaces.
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="./components.min.js"></script>
+</head>
+<body>
+    <component type="./watch.js" id="watchInstance"></component>
+    <component type="./car.js" id="carInstance" watchInterface="watchInstance"></component>
+</body>
+</html>
+```
