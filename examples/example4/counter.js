@@ -1,7 +1,6 @@
 var Counter;
-
 Counter = new Component('./counter.js');
-Counter.extends('./ui-element.js');
+Counter.extend('./ui-element.js');
 Counter.listen('tickEvent', function (timer) {
     this.add();
 });
@@ -11,7 +10,7 @@ Counter.provide('counterInterface', function () {
         'get' : this.get
     };
 });
-Counter.build(function (element) {
+Counter.install(function (element) {
     var counted = 0;
 
     this.add = function () {

@@ -14,11 +14,9 @@
                     \--tick---< <>---move-----cart------( 0-------|
 
 -->
-<dcc-component type="./timer.js" id="timer1"></dcc-component>
-<dcc-component type="./counter.js" id="counter1"></dcc-component>
-<dcc-component type="./car.js" id="car1"></dcc-component>
-<dcc-connector publisher="timer1.tick" subscriber="counter1.add"></dcc-connector>
-<dcc-connector publisher="timer1" subscriber="car1"></dcc-connector>
-<dcc-connector requirer="car1.carInterface" required="counter1.counterInterface"></dcc-connector>
+<component type="./timer.js" id="timer1"></component>
+<component type="./counter.js" id="counter1" tickEvent="timer1"></component><br>
+<component type="./car.js" id="car1" tickEvent="timer1" counterInterface="counter1"></component><br>
+<component type="./car.js" id="car2" tickEvent="timer1" counterInterface="counter1"></component>
 </body>
 </html>

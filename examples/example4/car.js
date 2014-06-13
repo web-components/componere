@@ -1,7 +1,6 @@
 var Car;
-
 Car = new Component('./car.js');
-Car.extends('./ui-element.js');
+Car.extend('./ui-element.js');
 Car.require('counterInterface', function (counter) {
     this.counter = counter;
 });
@@ -13,13 +12,11 @@ Car.provide('carInterface', function () {
         'move' : this.move
     };
 });
-Car.build(function (element) {
+Car.install(function (element) {
     this.move = function () {
         var ground, i;
-
         ground = '';
         for (i = 0; i < this.counter.get(); i += 1) { ground += '-'; }
-
         this.html(ground + '(=>)');
     };
 });
