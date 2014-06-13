@@ -75,28 +75,47 @@ MyFirstComponent.start(function () {
 ```
 
 ### Manipulando graficamente
-Todo componente recebe no ciclo de install uma referência para a tag HTML que o chamou. Essa tag é o escopo de aplicação do componente e é nela que devemos colocar a UI do componente .
+Todo componente recebe no ciclo de install uma referência para a tag HTML que o chamou. Essa tag é o escopo de aplicação do componente e é nela que devemos colocar a UI do componente.
 
 ```js
 var MyFirstComponent;
 MyFirstComponent = new Component('http://my-awsome-domain.com/my-first-component.js');
 MyFirstComponent.install(function (element) {
-    this.sayHello = function () {
-        element.innerHTML = 'ola';
+    this.html = function (val) {
+        if (val) { element.innerHTML = val; }
+        return element.innerHTML;
     };
 });
 MyFirstComponent.start(function () {
-    this.sayHello();
+    this.html('ola!');
 });
 ```
 
 Vale notar que o objeto element é um objeto do DOM e portanto implementa toda a API de HTMLElementPrototype com métodos como appendChild, innerHTML, etc...
 
+### Herança de componentes
+Todo componente pode ser extendido, e um componente pode extender multiplos componentes distintos, para extender um componente devemos utilizar o método extend passando a URI do componente que desejamos extender. Um ponto importante é que os componentes herdeiros do componente original vão rodar o ciclo de install do componente pai, contudo, não vão rodar o ciclo de start do pai.
 
+Por exemplo, vamos supor que desejamos extender o MyFirstComponent criando um novo componente MyAwsomeComponent.
 
-
-
-
+```js
+var MyAwsomeComponent;
+MyAwsomeComponent = new Component('http://my-awsome-domain.com/my-awsome-component.js');
+MyAwsomeComponent.extend('http://my-awsome-domain.com/my-first-component.js');
+MyAwsomeComponent.install(function () {
+    this.fizz = function () {
+        this.html('fizz');
+    };
+    
+    this.buz = function () {
+        this.html('buz');
+    };
+});
+MyAwsomeComponent.start(function () {
+    this.fizz();
+});
+```
+Note que como MyAwsomeComponent extende MyFirstComponent o método html esta acessível.
 
 
 
