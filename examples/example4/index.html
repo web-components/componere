@@ -2,21 +2,11 @@
 <html>
 <head>
     <title></title>
-    <script src="../../components.js"></script>
+    <script src="../../componere.min.js"></script>
 </head>
 <body>
-<!--
-
-                    /--tick---< <>---count----counter-------------|
-                   /                                              |
-           timer---                                               |
-                   \                                              |
-                    \--tick---< <>---move-----cart------( 0-------|
-
--->
 <component type="./timer.js" id="timer1"></component>
-<component type="./counter.js" id="counter1" tickEvent="timer1"></component><br>
-<component type="./car.js" id="car1" tickEvent="timer1" counterInterface="counter1"></component><br>
-<component type="./car.js" id="car2" tickEvent="timer1" counterInterface="counter1"></component>
+<component type="./counter.js" id="counter1" tickEvent="timer1"></component>
+<component type="./car.js" id="car1" tickEvent="timer1" counterInterface="counter1"></component>
 </body>
 </html>
