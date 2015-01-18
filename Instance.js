@@ -21,10 +21,10 @@
   Instance.prototype.canConnect = function () {
     return this.status === 'installed' && this.component.requires.every(function (required) {
       var instance = Instance.instances[this.element.getAttribute(required.interfaceName)];
-      return instance && instance.status !== 'loaded';
+      return instance && instance.status !== 'loaded' && instance.status !== 'installing';
     }.bind(this)) && this.component.listens.every(function (required) {
       var instance = Instance.instances[this.element.getAttribute(required.eventName)];
-      return instance && instance.status !== 'loaded';
+      return instance && instance.status !== 'loaded' && instance.status !== 'installing';
     }.bind(this));
   };
 
