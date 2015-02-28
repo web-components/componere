@@ -172,7 +172,7 @@ Todo componente pode prover e requisitar interfaces. Por exemplo, vamos supor qu
 ```js
 var Watch;
 Watch = new Component('./watch.js');
-Watch.install(function (element) {
+Watch.install(function (done) {
     this.hours = function () {
         return new Date().getHours();
     };
@@ -184,6 +184,8 @@ Watch.install(function (element) {
     this.seconds = function () {
         return new Date().getSeconds();
     };
+    
+    done();
 });
 Watch.provide('watchInterface', function (done) {
     done({
