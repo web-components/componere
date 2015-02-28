@@ -30,37 +30,214 @@
 
       </header>
       <section>
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a id="components-framework" class="anchor" href="#components-framework" aria-hidden="true"><span class="octicon octicon-link"></span></a>Components Framework</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>É um webframework para construção de webcomponents.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<h2>
+<a id="instalação" class="anchor" href="#instala%C3%A7%C3%A3o" aria-hidden="true"><span class="octicon octicon-link"></span></a>Instalação</h2>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Para instalar, basta incluir o arquivo components.min.js na pagina html.</p>
+
+<div class="highlight highlight-html"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+&lt;<span class="pl-ent">head</span>&gt;
+    &lt;<span class="pl-ent">title</span>&gt;&lt;/<span class="pl-ent">title</span>&gt;
+<span class="pl-s2">    &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s1"><span class="pl-pds">"</span>https://raw.githubusercontent.com/web-components/componere/master/componere.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;/<span class="pl-ent">head</span>&gt;
+&lt;<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</pre></div>
+
+<h2>
+<a id="utilização-básica" class="anchor" href="#utiliza%C3%A7%C3%A3o-b%C3%A1sica" aria-hidden="true"><span class="octicon octicon-link"></span></a>Utilização básica</h2>
+
+<p>Os componentes são declarados no arquivo html sempre com os atributos type e id. O type dos componentes já são as URIs que irão fornecer o código do componente, portanto, o próprio framework resolve o type, instala o componente e inicia.</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./timer.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>myTimer<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;</pre></div>
 
 <h3>
-<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a id="meu-primeiro-componente" class="anchor" href="#meu-primeiro-componente" aria-hidden="true"><span class="octicon octicon-link"></span></a>Meu primeiro componente</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>Para construir um componente, basta acessar o contrutor que o framework disponibiliza no escopo global da aplicação javascript. O construtor sempre deve receber o id do componente que conforme explicado na utilização básica deve sempre ser a URI do componente.</p>
 
-<h3>
-<a id="rather-drive-stick" class="anchor" href="#rather-drive-stick" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> MyFirstComponent;
+MyFirstComponent <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./my-first-component.js<span class="pl-pds">'</span></span>);</pre></div>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p>E para acessar o componente, basta inclui-lo na sua página html.</p>
 
-<h3>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./my-first-component.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>myFirstComponentInstance<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;</pre></div>
 
 <h3>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a id="adicionando-comportamento" class="anchor" href="#adicionando-comportamento" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adicionando comportamento</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="https://help.github.com/pages">https://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>O componente anterior não faz muita coisa além de existir no browser. Para adicionarmos um pouco de comportamento devemos olhar o ciclo de install. No ciclo de install o componente ainda não recebeu nenhuma das interfaces requeridas e nenhum evento esta sendo escutado ou emitido pelo componente. Portanto, é nessa etapa que devemos adicionar métodos ao nosso componente. Após tudo ter sido realizado, a callback done deve ser invocado para informar ao framework que o ciclo de instalação terminou.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> MyFirstComponent;
+MyFirstComponent <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./my-first-component.js<span class="pl-pds">'</span></span>);
+MyFirstComponent.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">sayHello</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-s3">alert</span>(<span class="pl-s1"><span class="pl-pds">'</span>Hello!<span class="pl-pds">'</span></span>);
+    };
+    done();
+});</pre></div>
+
+<p>Agora precisamos apresentar a mensagem para o usuário, para fazer isso, devemos olhar o ciclo de start. No ciclo de start o componente já esta pronto para ser usado, todas as interfaces foram fornecidas todos os eventos já estão sendo escutados e todos os métodos ja foram adicionados. Portanto, é nessa etapa que devemos iniciar o comportamento do componente. Analogo ao ciclo de install, o callback done deve ser invocado após tudo ter sido executado.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> MyFirstComponent;
+MyFirstComponent <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./my-first-component.js<span class="pl-pds">'</span></span>);
+MyFirstComponent.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">sayHello</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-s3">alert</span>(<span class="pl-s1"><span class="pl-pds">'</span>Hello!<span class="pl-pds">'</span></span>);
+    };
+    done();
+});
+MyFirstComponent.<span class="pl-sc">start</span>(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-v">this</span>.sayHello();
+    done();
+});</pre></div>
+
+<h3>
+<a id="manipulando-graficamente" class="anchor" href="#manipulando-graficamente" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manipulando graficamente</h3>
+
+<p>Todo componente possui uma referência para o elemento do DOM que o invocou, esse elemento é o escopo de aplicação do componente e pode ser acessada pela propriedade element.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> MyFirstComponent;
+MyFirstComponent <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./my-first-component.js<span class="pl-pds">'</span></span>);
+MyFirstComponent.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">html</span> <span class="pl-k">=</span> <span class="pl-st">function</span> (<span class="pl-vpf">val</span>) {
+        <span class="pl-k">if</span> (val) { <span class="pl-v">this</span>.element.innerHTML <span class="pl-k">=</span> val; }
+        <span class="pl-k">return</span> <span class="pl-v">this</span>.element.innerHTML;
+    };
+    done();
+});
+MyFirstComponent.<span class="pl-sc">start</span>(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-v">this</span>.html(<span class="pl-s1"><span class="pl-pds">'</span>ola!<span class="pl-pds">'</span></span>);
+    done();
+});</pre></div>
+
+<p>Vale notar que o objeto element é um objeto do DOM e portanto implementa toda a API de HTMLElementPrototype com métodos como appendChild, innerHTML, etc...</p>
+
+<h3>
+<a id="herança-de-componentes" class="anchor" href="#heran%C3%A7a-de-componentes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Herança de componentes</h3>
+
+<p>Todo componente pode ser extendido, e um componente pode extender múltiplos componentes distintos, para extender um componente, devemos utilizar o método extend passando a URI do componente que desejamos extender.</p>
+
+<p>Por exemplo, vamos supor que desejamos extender o MyFirstComponent criando um novo componente MyAwsomeComponent.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> MyAwsomeComponent;
+MyAwsomeComponent <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./my-awsome-component.js<span class="pl-pds">'</span></span>);
+MyAwsomeComponent.extend(<span class="pl-s1"><span class="pl-pds">'</span>./my-first-component.js<span class="pl-pds">'</span></span>);
+MyAwsomeComponent.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">fizz</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-v">this</span>.html(<span class="pl-s1"><span class="pl-pds">'</span>fizz<span class="pl-pds">'</span></span>);
+    };
+
+    <span class="pl-s3">this</span>.<span class="pl-en">buz</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-v">this</span>.html(<span class="pl-s1"><span class="pl-pds">'</span>buz<span class="pl-pds">'</span></span>);
+    };
+    done();
+});
+MyAwsomeComponent.<span class="pl-sc">start</span>(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-v">this</span>.fizz();
+    done();
+});</pre></div>
+
+<p>Note que como MyAwsomeComponent extende MyFirstComponent o método html esta acessível.</p>
+
+<h3>
+<a id="emitindo-e-escutando-eventos-de-outros-componentes" class="anchor" href="#emitindo-e-escutando-eventos-de-outros-componentes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Emitindo e escutando eventos de outros componentes</h3>
+
+<p>Todo componente pode emitir e escutar eventos de outros componentes. Por exemplo, vamos supor que desejamos ter um componente timer que fica a cada segundo emitindo um sinal de tick e um couter que toda vez que recebe um sinal de tick incrementa um contador.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Timer;
+Timer <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./timer.js<span class="pl-pds">'</span></span>);
+Timer.publish(<span class="pl-s1"><span class="pl-pds">'</span>tickEvent<span class="pl-pds">'</span></span>);
+Timer.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">tick</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-v">this</span>.tickEvent();
+        element.innerHTML <span class="pl-k">=</span> element.innerHTML <span class="pl-k">===</span> <span class="pl-s1"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span> <span class="pl-k">?</span> <span class="pl-s1"><span class="pl-pds">'</span>|<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>;
+        <span class="pl-v">this</span>.tickEvent();
+    };
+    done();
+});
+Timer.<span class="pl-sc">start</span>(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">setInterval</span>(<span class="pl-v">this</span>.tick.bind(<span class="pl-v">this</span>), <span class="pl-c1">1000</span>);
+    done();
+});</pre></div>
+
+<p>Note que ao informar que o timer emite um evento tickEvent automaticamente, um método tickEvent é adicionado ao componente que quando chamado dispara o evento. Lembre-se no ciclo de install esse método ainda não foi adicionado ao componente e portanto o evento não pode ser emitido, apenas após o ciclo de install isso pode ocorrer, por isso, apenas no start o tick é chamado.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Counter;
+Counter <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./counter.js<span class="pl-pds">'</span></span>);
+Counter.listen(<span class="pl-s1"><span class="pl-pds">'</span>tickEvent<span class="pl-pds">'</span></span>, <span class="pl-st">function</span> () {
+    <span class="pl-v">this</span>.<span class="pl-s3">add</span>();
+});
+Counter.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s">var</span> counted <span class="pl-k">=</span> <span class="pl-c1">0</span>;
+
+    <span class="pl-s3">this</span>.<span class="pl-en">add</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        counted <span class="pl-k">+=</span> <span class="pl-c1">1</span>;
+        element.innerHTML <span class="pl-k">=</span> counted.<span class="pl-s3">toString</span>();
+    };
+
+    done();
+});
+</pre></div>
+
+<p>Note que para informar que o componente escuta um evento tickEvent, devemos utilizar o método listen. No callback do evento, o componente ja passou pelos ciclos de install e start e, portanto, o componente já está montado e pronto para uso.</p>
+
+<p>Após criados os componentes, devemos instancia-los e ligar as instancias para escutarem os eventos das instâncias corretas.</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./timer.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>timerInstance<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;
+&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./counter.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>counterInstance<span class="pl-pds">"</span></span> <span class="pl-e">tickEvent</span>=<span class="pl-s1"><span class="pl-pds">"</span>timerInstance<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;</pre></div>
+
+<h3>
+<a id="requisitando-e-provendo-interfaces" class="anchor" href="#requisitando-e-provendo-interfaces" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requisitando e provendo interfaces</h3>
+
+<p>Todo componente pode prover e requisitar interfaces. Por exemplo, vamos supor que desejamos ter um componente car que desenha na tela um carro, contudo, para desenhar o carro, devemos saber a sua posição e para saber a posição do carro, precisamos saber o tempo transcorrido. Portanto, o componente car vai requerer uma interface watchInterface que retorna o tempo e vamos implementar um componente watch que irá prover essa interface.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Watch;
+Watch <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./watch.js<span class="pl-pds">'</span></span>);
+Watch.install(<span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    <span class="pl-s3">this</span>.<span class="pl-en">hours</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">Date</span>().<span class="pl-s3">getHours</span>();
+    };
+
+    <span class="pl-s3">this</span>.<span class="pl-en">minutes</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">Date</span>().<span class="pl-s3">getMinutes</span>();
+    };
+
+    <span class="pl-s3">this</span>.<span class="pl-en">seconds</span> <span class="pl-k">=</span> <span class="pl-st">function</span> () {
+        <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">Date</span>().<span class="pl-s3">getSeconds</span>();
+    };
+
+    done();
+});
+Watch.provide(<span class="pl-s1"><span class="pl-pds">'</span>watchInterface<span class="pl-pds">'</span></span>, <span class="pl-st">function</span> (<span class="pl-vpf">done</span>) {
+    done({
+        <span class="pl-s1"><span class="pl-pds">'</span>hours<span class="pl-pds">'</span></span>   <span class="pl-k">:</span> <span class="pl-v">this</span>.hours,
+        <span class="pl-s1"><span class="pl-pds">'</span>minutes<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-v">this</span>.minutes,
+        <span class="pl-s1"><span class="pl-pds">'</span>seconds<span class="pl-pds">'</span></span> <span class="pl-k">:</span> <span class="pl-v">this</span>.seconds
+    });
+});</pre></div>
+
+<p>Note que o provide recebe uma função que constrói a interface provida, essa função, é executada no contexto do componente e só é executada após o ciclo de install. O componente montado deve ser devolvido pelo callback done.</p>
+
+<div class="highlight highlight-js"><pre><span class="pl-s">var</span> Car;
+Car <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Component</span>(<span class="pl-s1"><span class="pl-pds">'</span>./car.js<span class="pl-pds">'</span></span>);
+Car.require(<span class="pl-s1"><span class="pl-pds">'</span>watchInterface<span class="pl-pds">'</span></span>, <span class="pl-st">function</span> (<span class="pl-vpf">watch</span>, <span class="pl-vpf">done</span>) {
+    <span class="pl-v">this</span>.watch <span class="pl-k">=</span> watch;
+    done();
+});</pre></div>
+
+<p>Note que o require recebe a interface requerida no callback passado. O contexto de execução do callback é o do componente, portanto, podemos adicionar ao objeto a interface requerida como um atributo para uso posterior.</p>
+
+<p>Após criados os componentes, devemos instancia-los e ligar as instancias para proverem as interfaces.</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./watch.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>watchInstance<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;
+&lt;<span class="pl-ent">component</span> <span class="pl-e">type</span>=<span class="pl-s1"><span class="pl-pds">"</span>./car.js<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s1"><span class="pl-pds">"</span>carInstance<span class="pl-pds">"</span></span> <span class="pl-e">watchInterface</span>=<span class="pl-s1"><span class="pl-pds">"</span>watchInstance<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">component</span>&gt;</pre></div>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
