@@ -9,7 +9,7 @@ Para instalar, basta incluir o arquivo components.min.js na pagina html.
 <html>
 <head>
     <title></title>
-    <script type="text/javascript" src="https://raw.githubusercontent.com/web-components/componere/master/componere.min.js"></script>
+    <script type="text/javascript" src="http://web-components.github.io/componere/componere.min.js"></script>
 </head>
 <body>
 </body>
