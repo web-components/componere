@@ -82,15 +82,15 @@
   };
 
   Component.prototype.connectInstance = function (instance, done) {
-    async.parallel([function (done) {
+    async.series([function (done) {
+      async.each(this.parents, function (parent, done) {
+        Component.components[parent.parentId].connectInstance(instance, done);
+      }.bind(this), done);
+    }.bind(this), function (done) {
       async.each(this.requires, function (required, done) {
         var requiredInstance, requiredInterface;
         requiredInstance = Instance.instances[instance.element.getAttribute(required.interfaceName)];
-        for (var i = 0; i < requiredInstance.component.provides.length; i++) {
-          if (requiredInstance.component.provides[i].interfaceName === required.interfaceName) {
-            requiredInterface = requiredInstance.component.provides[i];
-          }
-        }
+        requiredInterface = requiredInstance.component.getConnector(required);
         requiredInterface.interfaceConnector.call(requiredInstance, function (data) {
           required.interfaceConnector.call(instance, data, done);
         });
@@ -102,6 +102,20 @@
         done();
       }.bind(this), done);
     }.bind(this)], done);
+  };
+
+  Component.prototype.getConnector = function (required) {
+    var i, parent, connector;
+    for (i = 0; i < this.provides.length; i++) {
+      if (this.provides[i].interfaceName === required.interfaceName) {
+        return this.provides[i];
+      }
+    }
+    for (i = 0; i < this.parents.length; i++) {
+      parent = Component.components[this.parents[i].parentId];
+      connector = parent.getConnector(required);
+      if (connector) return connector;
+    }
   };
 
   Component.prototype.startInstance = function (instance, done) {
