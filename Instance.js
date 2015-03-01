@@ -63,8 +63,8 @@
     async.series([function (done) {
       this.status = 'starting';
       this.component.publishes.forEach(function (publishes) {
-        var event = new Event(publishes.eventName);
         this[publishes.eventName] = function () {
+          var event = new CustomEvent(publishes.eventName, {'detail' : data});
           this.element.dispatchEvent(event);
         }.bind(this);
       }.bind(this));
