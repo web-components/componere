@@ -62,14 +62,6 @@
     if (!this.canStart()) return;
     async.series([function (done) {
       this.status = 'starting';
-      this.component.publishes.forEach(function (publishes) {
-        this[publishes.eventName] = function () {
-          var event = new CustomEvent(publishes.eventName, {'detail' : data});
-          this.element.dispatchEvent(event);
-        }.bind(this);
-      }.bind(this));
-      done();
-    }.bind(this), function (done) {
       this.component.startInstance(this, done);
     }.bind(this), function (done) {
       this.status = 'started';
