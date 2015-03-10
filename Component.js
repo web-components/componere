@@ -1,3 +1,4 @@
+
 /*globals window:false, async:false, Event:false*/
 (function (window, async) {
   'use strict';
@@ -75,6 +76,13 @@
         Component.components[parent.parentId].installInstance(instance, done);
       }.bind(this), done);
     }.bind(this), function (done) {
+      this.publishes.forEach(function (publishes) {
+        instance[publishes.eventName] = function (data) {
+          var event = new CustomEvent(publishes.eventName, {'detail' : data});
+          instance.element.dispatchEvent(event);
+        }.bind(this);
+      }.bind(this));
+
       async.each(this.installers, function (installer, done) {
         installer.installer.apply(instance, [done]);
       }.bind(this), done);
