@@ -1,4 +1,3 @@
-
 /*globals window:false, async:false, Event:false*/
 (function (window, async) {
   'use strict';
